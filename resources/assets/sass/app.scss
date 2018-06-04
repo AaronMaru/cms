@@ -7,7 +7,17 @@
 
 @import "node_modules/font-awesome/scss/font-awesome";
 
-// Bulma
-@import "node_modules/bulma/bulma";
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
 
-@import "node_modules/buefy/scss/buefy";
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+
+
+@import "overrides";
+@import "helpers";
+@import "styles";
