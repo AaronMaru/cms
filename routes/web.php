@@ -22,6 +22,7 @@ Route::prefix('manage')->middleware('role:superadministrator')->group(function (
         return redirect()->route('manage.dashboard');
     });
     Route::get('/dashboard', 'ManageController@dashboard')->name('manage.dashboard');
+    Route::resource('/users', 'UserController');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

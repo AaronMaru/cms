@@ -13470,43 +13470,134 @@ a.text-dark:focus {
   background-color: #fff;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  z-index: 1000;
 }
 
-.side-menu {
+.navbar-laravel {
+  -webkit-box-shadow: 0 0 1px rgba(57, 70, 78, 0.15), 0 10px 55px -8px rgba(57, 70, 78, 0.25);
+          box-shadow: 0 0 1px rgba(57, 70, 78, 0.15), 0 10px 55px -8px rgba(57, 70, 78, 0.25);
+}
+
+body {
+  overflow-x: hidden;
+}
+
+#wrapper {
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+  padding-left: 250px;
+}
+
+#sidebar-wrapper {
   position: fixed;
-  height: 100vh;
-  width: 200px;
-  background-color: white;
+  left: 250px;
+  width: 0;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #fff;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
-.side-menu p {
-  margin-left: 1rem;
-  text-transform: uppercase;
-  font-size: 12px;
-  color: #999999;
-  font-weight: bold;
+#wrapper.toggled #sidebar-wrapper {
+  width: 250px;
 }
 
-.side-menu ul {
-  list-style-type: none;
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px;
 }
 
-.side-menu ul li {
-  margin-left: -1.5rem;
-  padding: .5rem 0;
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -250px;
 }
 
-.side-menu ul li:hover {
-  background-color: #e6f2ff;
-  color: #00cc00;
+/* Sidebar Styles */
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding-top: 1rem;
 }
 
-.side-menu ul a {
-  padding-left: 1rem;
-  color: #595959;
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 40px;
 }
 
-.side-menu ul a:hover {
+.sidebar-nav li a {
+  display: block;
   text-decoration: none;
+  color: #999999;
+  padding-left: 1rem;
+}
+
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #fff;
+  background: #808080;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+
+.sidebar-label {
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  #wrapper {
+    padding-left: 0;
+  }
+
+  #wrapper.toggled {
+    padding-left: 250px;
+  }
+
+  #sidebar-wrapper {
+    width: 0;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+  }
+
+  #page-content-wrapper {
+    padding: 20px;
+    position: relative;
+  }
+
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
+}
+
+.bd-navbar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+.container-header {
+  position: relative;
+}
+
+.header-button {
+  position: absolute;
+  right: 10px;
 }
 

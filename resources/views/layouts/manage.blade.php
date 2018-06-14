@@ -11,7 +11,7 @@
     <title>DEV - MANAGEMENT</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -21,15 +21,22 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+    @include('partials.nav')
 
-        @include('partials.nav')
-
+    <div id="wrapper" class="toggled">
+        <!-- Sidebar -->
         @include('partials.sidebar')
+        <!-- /#sidebar-wrapper -->
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+        <!-- Page Content -->
+            <div id="app">
+                <div id="page-content-wrapper">
+                    @yield('content')
+                </div>
+
+            </div>
     </div>
+    <script src="{{ asset('js/app.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>

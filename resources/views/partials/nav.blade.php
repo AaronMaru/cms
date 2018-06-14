@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+<nav class="navbar navbar-expand-md navbar-light navbar-laravel bd-navbar">
   <div class="container">
       <a class="navbar-brand" href="{{ url('/') }}">
           <img src="{{ url('image\blue.png') }}" alt="" height="30px" width="30px">
