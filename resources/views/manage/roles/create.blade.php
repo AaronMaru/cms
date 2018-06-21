@@ -3,87 +3,43 @@
 @section('content')
 	<div class="container">
 		<div class="row container-header">
-			<h1 class="header-title">Create New Permission</h1>
+			<h1 class="header-title">Create New Role</h1>
 			<div class="header-button float-right">
-				{{-- <a href="{{ route('users.create') }}" class="btn btn-primary"><i class="fa fa-user-add"></i>Create</a> --}}
+				{{-- <a href="{{ route('roles.create') }}" class="btn btn-primary"><i class="fa fa-user-add"></i>Create</a> --}}
 			</div>
 		</div>
 		<hr>
-		<form action="{{ route('users.store') }}" method="POST">
+		<form action="{{ route('roles.store') }}" method="POST">
 			{{ csrf_field() }}
-			<fieldset class="form-group row">
-				<div class="col-sm-10">
-					<div class="form-check form-check-inline">
-						<label class="form-check-label">
-							<input class="form-check-input" type="radio" name="permission_type" id="basic"  v-model="permissionType" value="basic" checked>
-							Basic Permission
+			<div class="form-group">
+				<label for="exampleInputEmail1">Name (Human Readable)</label>
+				<input type="text" class="form-control" name="display_name" placeholder="Enter name" value="{{ old('display_name') }}">
+			</div>
+			<div class="form-group">
+				<label for="exampleInputEmail1">Slug (Can not be edit)</label>
+				<input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Enter slug">
+			</div>
+			<div class="form-group">
+				<label for="exampleInputEmail1">Description</label>
+				<input type="text" class="form-control" name="description" value="{{ old('description') }}" placeholder="Enter description">
+			</div>
+			<input type="hidden" :value="permissionSelected" name="permissions">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Permissions:</h5>
+					@foreach ($permissions as $permission)
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" v-model="permissionSelected" id="{{ $permission->name }}" value="{{ $permission->id }}">
+						<label class="form-check-label" for="{{ $permission->name }}">
+							{{ $permission->display_name }} <em>({{ $permission->description }})</em>
 						</label>
 					</div>
-					<div class="form-check form-check-inline">
-						<label class="form-check-label">
-							<input class="form-check-input" type="radio" name="permission_type" id="crud"  v-model="permissionType" value="crud">
-							CRUD Permission
-						</label>
-					</div>
-				</div>
-			</fieldset>
-			<div v-if="permissionType == 'basic'">
-				<div class="form-group">
-					<label for="exampleInputEmail1">Name (Display Name)</label>
-					<input type="text" class="form-control" name="name">
-				</div>
-				<div class="form-group">
-					<label for="exampleInputEmail1">Slug</label>
-					<input type="text" class="form-control" name="slug">
-				</div>
-				<div class="form-group">
-					<label for="exampleInputPassword1">Description</label>
-					<input type="text" class="form-control" name="description">
+					@endforeach
 				</div>
 			</div>
-			<div v-if="permissionType == 'crud'">
-				<div class="form-group">
-					<label for="exampleInputEmail1">Resource</label>
-					<input type="text" class="form-control" name="resource" v-model="resource">
-				</div>
-				<div class="form-check">
-					<label class="form-check-label">
-						<input class="form-check-input" type="checkbox" v-model="crudSelected"  id="inlineCheckbox1" value="create"> Create
-					</label>
-				</div>
-				<div class="form-check">
-					<label class="form-check-label">
-						<input class="form-check-input" type="checkbox" v-model="crudSelected" id="inlineCheckbox2" value="read"> Read
-					</label>
-				</div>
-				<div class="form-check">
-					<label class="form-check-label">
-						<input class="form-check-input" type="checkbox" v-model="crudSelected" id="inlineCheckbox3" value="update"> Update
-					</label>
-				</div>
-				<div class="form-check">
-					<label class="form-check-label">
-						<input class="form-check-input" type="checkbox" v-model="crudSelected" id="inlineCheckbox3" value="delete"> Delete
-					</label>
-				</div>
-				<table class="table table-sm">
-					<thead>
-						<tr>
-							<th scope="col">Name</th>
-							<th scope="col">Slug</th>
-							<th scope="col">Description</th>
-						</tr>
-					</thead>
-					<tbody v-if="resource.length >= 3">
-						<tr v-for="item in crudSelected">
-							<td v-text="crudName(item)"></td>
-							<td v-text="crudSlug(item)"></td>
-							<td v-text="crudDescription(item)"></td>
-						</tr>
-					</tbody>
-				</table>
+			<div class="form-group">
 			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" class="btn btn-primary">Create User</button>
 		</form>
 	</div>
 @endsection
@@ -93,24 +49,8 @@
 		var app = new Vue({
 			el: '#app',
 			data: {
-				permissionType: 'basic',
-				resource: '',
-				crudSelected: ['create', 'read', 'update', 'delete']
+				permissionSelected:[]
 			},
-			methods: {
-				crudName: function(item) {
-					return item.substr(0,1).toUpperCase() + item.substr(1) + " " +
-					app.resource.substr(0,1).toUpperCase() +
-					app.resource.substr(1);
-				},
-				crudSlug: function(item) {
-					return item.toLowerCase() + '-' + app.resource.toLowerCase();
-				},
-				crudDescription: function(item) {
-					return "Allow a User to " + item.toUpperCase() + ' a ' + app.resource.substr(0,1).toLowerCase() +
-					app.resource.substr(1);
-				}
-			}
 		});
 	</script>
 @endsection

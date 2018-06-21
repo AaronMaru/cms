@@ -3,54 +3,44 @@
 @section('content')
 	<div class="container">
 		<div class="row container-header">
-			<h1 class="header-title">Edit User</h1>
+			<h1 class="header-title">Edit {{ $role->display_name }}</h1>
 			<div class="header-button float-right">
-				{{-- <a href="{{ route('users.create') }}" class="btn btn-primary"><i class="fa fa-user-add"></i>Create</a> --}}
+				{{-- <a href="{{ route('roles.create') }}" class="btn btn-primary"><i class="fa fa-user-add"></i>Create</a> --}}
 			</div>
 		</div>
 		<hr>
-		<form action="{{ route('users.update', $user->id) }}" method="POST">
+		<form action="{{ route('roles.update', $role->id) }}" method="POST">
 			{{ method_field('PUT') }}
 			{{ csrf_field() }}
 			<div class="form-group">
-				<label for="exampleInputEmail1">Name</label>
-				<input type="text" class="form-control" name="name" placeholder="Enter name" value="{{ $user->name }}">
+				<label for="exampleInputEmail1">Name (Human Readable)</label>
+				<input type="text" class="form-control" name="display_name" placeholder="Enter name" value="{{ $role->display_name }}">
 			</div>
 			<div class="form-group">
-				<label for="exampleInputEmail1">Email address</label>
-				<input type="email" class="form-control" name="email" value="{{ $user->email }}" placeholder="Enter email">
+				<label for="exampleInputEmail1">Slug (Can not be edit)</label>
+				<input type="text" class="form-control" name="name" value="{{ $role->name }}" placeholder="slug" disabled>
 			</div>
-			{{-- <div class="form-group">
-				<label for="exampleInputPassword1">Password</label>
-				<input type="password" class="form-control" placeholder="Password" :disabled="auto_password">
-			</div> --}}
 			<div class="form-group">
-				<fieldset class="form-group row">
-					<legend class="col-form-legend col-sm-2">Password</legend>
-					<div class="col-sm-10">
-						<div class="form-check">
-							<label class="form-check-label">
-								<input class="form-check-input" type="radio" name="password_option" v-model="password_option" id="keep" value="keep" checked>
-								Do not change password
-							</label>
-						</div>
-						<div class="form-check">
-							<label class="form-check-label">
-								<input class="form-check-input" type="radio" name="password_option" v-model="password_option" id="auto" value="auto">
-								Auto-Generate New Password
-							</label>
-						</div>
-						<div class="form-check">
-							<label class="form-check-label">
-								<input class="form-check-input" type="radio" name="password_option" v-model="password_option" id="manual" value="manual">
-								Manually Set New Password
-							</label>
-							<input type="password" class="form-control" placeholder="Manually Passwords" v-if="password_option == 'manual'">
-						</div>
+				<label for="exampleInputEmail1">Description</label>
+				<input type="text" class="form-control" name="description" value="{{ $role->description }}" placeholder="description">
+			</div>
+			<input type="hidden" :value="permissionSelected" name="permissions">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Permissions:</h5>
+					@foreach ($permissions as $permission)
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" v-model="permissionSelected" id="{{ $permission->name }}" value="{{ $permission->id }}">
+						<label class="form-check-label" for="{{ $permission->name }}">
+							{{ $permission->display_name }} <em>({{ $permission->description }})</em>
+						</label>
 					</div>
-				</fieldset>
+					@endforeach
+				</div>
 			</div>
-			<button type="submit" class="btn btn-primary">Update User</button>
+			<div class="form-group">
+			</div>
+			<button type="submit" class="btn btn-primary">Save Change to Roles</button>
 		</form>
 	</div>
 @endsection
@@ -60,7 +50,7 @@
 		var app = new Vue({
 			el: '#app',
 			data: {
-				password_option: 'keep'
+				permissionSelected: {!! $role->permissions->pluck('id') !!}
 			},
 		});
 	</script>

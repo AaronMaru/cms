@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Hash;
 use Illuminate\Http\Request;
+use Session;
 
 class UserController extends Controller
 {

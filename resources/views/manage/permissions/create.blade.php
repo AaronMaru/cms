@@ -9,7 +9,7 @@
 			</div>
 		</div>
 		<hr>
-		<form action="{{ route('users.store') }}" method="POST">
+		<form action="{{ route('permissions.store') }}" method="POST">
 			{{ csrf_field() }}
 			<fieldset class="form-group row">
 				<div class="col-sm-10">
@@ -66,6 +66,7 @@
 						<input class="form-check-input" type="checkbox" v-model="crudSelected" id="inlineCheckbox3" value="delete"> Delete
 					</label>
 				</div>
+				<input type="hidden" name="crud_selected" :value="crudSelected">
 				<table class="table table-sm">
 					<thead>
 						<tr>

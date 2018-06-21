@@ -5,7 +5,7 @@
 		<div class="row container-header">
 			<h1 class="header-title">View User Details</h1>
 			<div class="header-button float-right">
-				<a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary"><i class="fa fa-user-add"></i>Edit User</a>
+				<a href="{{ route('permission.edit', $permission->id) }}" class="btn btn-primary"><i class="fa fa-user-add"></i>Edit Permission</a>
 			</div>
 		</div>
 		<hr>

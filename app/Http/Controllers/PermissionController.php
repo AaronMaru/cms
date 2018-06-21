@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Permission;
 use Illuminate\Http\Request;
+use Session;
 
 class PermissionController extends Controller
 {
@@ -59,8 +60,8 @@ class PermissionController extends Controller
             if (count($crud) > 0) {
                 foreach ($crud as $x) {
                     $slug = strtolower($x) . '-' . $request->resource;
-                    $slug = ucwords($x . ' ' . $request->resource);
-                    $slug = 'Allows a user to ' . strtoupper($x) . ' a ' . ucwords($request->resource);
+                    $display_name = ucwords($x . ' ' . $request->resource);
+                    $descriptoin = 'Allows a user to ' . strtoupper($x) . ' a ' . ucwords($request->resource);
 
                     $permission = new Permission();
                     $permission->name = $slug;
