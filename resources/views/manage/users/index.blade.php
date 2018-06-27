@@ -16,7 +16,7 @@
 					<th scope="col">Name</th>
 					<th scope="col">Email</th>
 					<th scope="col">Date Created</th>
-					<th scope="col">Action</th>
+					<th scope="col"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -26,7 +26,10 @@
 						<td>{{ $user->name }}</td>
 						<td>{{ $user->email }}</td>
 						<td>{{ $user->created_at }}</td>
-						<td><a class="btn btn-info btn-sm" href="{{ route('users.show', $user->id) }}">Show</a></td>
+						<td>
+							<a class="btn btn-info btn-sm" href="{{ route('users.show', $user->id) }}">Show</a>
+							<a class="btn btn-info btn-sm" href="{{ route('users.edit', $user->id) }}">Edit</a>
+						</td>
 					</tr>
 				@endforeach
 			</tbody>

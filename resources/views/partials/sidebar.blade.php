@@ -15,7 +15,15 @@
             <a href="{{ route('users.index') }}">Manage User</a>
         </li>
         <li>
-            <a href="{{ route('permissions.index') }}">Role &amp; Permission</a>
+            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">Roles &amp; Permissions</a>
+            <ul class="collapse list-unstyled show" id="pageSubmenu">
+                <li>
+                    <a href="{{ route('roles.index') }}">Roles</a>
+                </li>
+                <li>
+                    <a href="{{ route('permissions.index') }}">Permissions</a>
+                </li>
+            </ul>
         </li>
     </ul>
 </div>
