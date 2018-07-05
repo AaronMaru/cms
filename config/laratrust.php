@@ -17,7 +17,7 @@ return [
     | If true, the morphMap feature is going to be used. The array values that
     | are going to be used are the ones inside the 'user_models' array.
     |
-    */
+     */
     'use_morph_map' => false,
 
     /*
@@ -27,7 +27,7 @@ return [
     |
     | Defines if Laratrust will use Laravel's Cache to cache the roles and permissions.
     |
-    */
+     */
     'use_cache' => true,
 
     /*
@@ -38,7 +38,7 @@ return [
     | Defines if Laratrust will use the teams feature.
     | Please check the docs to see what you need to do in case you have the package already configured.
     |
-    */
+     */
     'use_teams' => false,
 
     /*
@@ -51,7 +51,7 @@ return [
     | If it's false, when checking a role/permission without specifying the team,
     | it will check only if the user has attached that role/permission ignoring the team.
     |
-    */
+     */
     'teams_strict_check' => false,
 
     /*
@@ -65,7 +65,7 @@ return [
     |
     | The key in the array is the name of the relationship inside the roles and permissions.
     |
-    */
+     */
     'user_models' => [
         'users' => 'App\User',
     ],
@@ -79,7 +79,7 @@ return [
     | If you want the Laratrust models to be in a different namespace or
     | to have a different name, you can do it here.
     |
-    */
+     */
     'models' => [
         /**
          * Role model
@@ -105,7 +105,7 @@ return [
     |
     | These are the tables used by Laratrust to store all the authorization data.
     |
-    */
+     */
     'tables' => [
         /**
          * Roles table.
@@ -146,7 +146,7 @@ return [
     |
     | These are the foreign keys used by laratrust in the intermediate tables.
     |
-    */
+     */
     'foreign_keys' => [
         /**
          * User foreign key on Laratrust's role_user and permission_user tables.
@@ -177,7 +177,7 @@ return [
     |
     | This configuration helps to customize the Laratrust middleware behavior.
     |
-    */
+     */
     'middleware' => [
         /**
          * Define if the laratrust middleware are registered automatically in the service provider
@@ -188,12 +188,12 @@ return [
          * Method to be called in the middleware return case.
          * Available: abort|redirect
          */
-        'handling' => 'abort',
+        'handling' => 'redirect',
 
         /**
          * Parameter passed to the middleware_handling method
          */
-        'params' => '403',
+        'params' => '/login',
 
     ],
 
@@ -205,6 +205,6 @@ return [
     | Supported cases for the magic can method (Refer to the docs).
     | Available: camel_case|snake_case|kebab_case
     |
-    */
+     */
     'magic_can_method_case' => 'kebab_case',
 ];

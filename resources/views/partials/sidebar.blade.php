@@ -8,6 +8,14 @@
         </li>
         <li>
             <p class="sidebar-label">
+                Content
+            </p>
+        </li>
+        <li>
+            <a href="{{ route('posts.index') }}" class="{{ Nav::isResource('posts', 2) }}">Blog Posts</a>
+        </li>
+        <li>
+            <p class="sidebar-label">
                 Administator
             </p>
         </li>

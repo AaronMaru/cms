@@ -25,6 +25,7 @@ Route::prefix('manage')->middleware('role:superadministrator')->group(function (
     Route::resource('/users', 'UserController');
     Route::resource('/permissions', 'PermissionController');
     Route::resource('/roles', 'RoleController');
+    Route::resource('/posts', 'PostController');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
