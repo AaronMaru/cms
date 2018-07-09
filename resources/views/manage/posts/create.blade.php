@@ -14,13 +14,9 @@
 				<form action="{{ route('posts.store') }}" method="POST">
 					{{ csrf_field() }}
 					<div class="form-group">
-						<input type="text" class="form-control" name="display_name" placeholder="Post Title" value="{{ old('display_name') }}">
+						<input type="text" class="form-control" name="display_name" placeholder="Post Title" v-model="title">
 					</div>
-					<div class="form-group">
-						<i class="fa fa-file-text"></i>
-						<label>{{ url('/blog') }}</label>
-						<button type="button" class="btn btn-outline-secondary btn-sm btn-margin">Edit</button>
-					</div>
+					<slug-widget url="{{ url('/') }}" subdirectory="blog" :title="title" @slug-changed="updateSlug"></slug-widget>
 					<div class="form-group">
 						<textarea class="form-control" placeholder="Compose your masterpiece..."  rows="30"></textarea>
 					</div>
@@ -77,7 +73,14 @@
 		var app = new Vue({
 			el: '#app',
 			data: {
+				title: '',
+				slug: ''
 			},
+			methods: {
+				updateSlug: function(val) {
+					this.slug = val;
+				},
+			}
 		});
 	</script>
 @endsection

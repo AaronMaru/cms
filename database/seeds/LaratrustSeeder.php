@@ -1,7 +1,7 @@
 <?php
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class LaratrustSeeder extends Seeder
 {
@@ -25,11 +25,11 @@ class LaratrustSeeder extends Seeder
             $role = \App\Role::create([
                 'name' => $key,
                 'display_name' => ucwords(str_replace('_', ' ', $key)),
-                'description' => ucwords(str_replace('_', ' ', $key))
+                'description' => ucwords(str_replace('_', ' ', $key)),
             ]);
             $permissions = [];
 
-            $this->command->info('Creating Role '. strtoupper($key));
+            $this->command->info('Creating Role ' . strtoupper($key));
 
             // Reading role permission modules
             foreach ($modules as $module => $value) {
@@ -44,7 +44,7 @@ class LaratrustSeeder extends Seeder
                         'description' => ucfirst($permissionValue) . ' ' . ucfirst($module),
                     ])->id;
 
-                    $this->command->info('Creating Permission to '.$permissionValue.' for '. $module);
+                    $this->command->info('Creating Permission to ' . $permissionValue . ' for ' . $module);
                 }
             }
 
@@ -56,8 +56,9 @@ class LaratrustSeeder extends Seeder
             // Create default user for each role
             $user = \App\User::create([
                 'name' => ucwords(str_replace('_', ' ', $key)),
-                'email' => $key.'@app.com',
-                'password' => bcrypt('password')
+                'email' => $key . '@app.com',
+                'password' => bcrypt('password'),
+                'api_token' => bin2hex(openssl_random_pseudo_bytes(30)),
             ]);
 
             $user->attachRole($role);
@@ -65,7 +66,6 @@ class LaratrustSeeder extends Seeder
 
         // Creating user with permissions
         if (!empty($userPermission)) {
-
             foreach ($userPermission as $key => $modules) {
 
                 foreach ($modules as $module => $value) {
@@ -73,8 +73,9 @@ class LaratrustSeeder extends Seeder
                     // Create default user for each permission set
                     $user = \App\User::create([
                         'name' => ucwords(str_replace('_', ' ', $key)),
-                        'email' => $key.'@app.com',
+                        'email' => $key . '@app.com',
                         'password' => bcrypt('password'),
+                        'api_token' => bin2hex(openssl_random_pseudo_bytes(30)),
                         'remember_token' => str_random(10),
                     ]);
                     $permissions = [];
@@ -89,7 +90,7 @@ class LaratrustSeeder extends Seeder
                             'description' => ucfirst($permissionValue) . ' ' . ucfirst($module),
                         ])->id;
 
-                        $this->command->info('Creating Permission to '.$permissionValue.' for '. $module);
+                        $this->command->info('Creating Permission to ' . $permissionValue . ' for ' . $module);
                     }
                 }
 

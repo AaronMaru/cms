@@ -32,7 +32,7 @@
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" href="#"><i class="fa fa-fw fa-user-circle-o"></i> Profilel</a>
                           <a class="dropdown-item" href="#"><i class="fa fa-fw fa-bell"></i> Notification</a>
-                          <a class="dropdown-item" href="#"><i class="fa fa-fw fa-cog"></i> Setting</a>
+                          <a class="dropdown-item" href="/manage"><i class="fa fa-fw fa-cog"></i> Manage</a>
                           <div class="dropdown-divider"></div>
 
                           <a class="dropdown-item" href="{{ route('logout') }}"
