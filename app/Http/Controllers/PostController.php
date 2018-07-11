@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct()
+    {
+        $this->middleware('role:superadministrator|administrator|editor|author|contributor');
+    }
+
     public function index()
     {
         return view('manage.posts.index');
@@ -43,7 +45,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function shew($id)
     {
         //
     }
@@ -80,5 +82,10 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function apiCheckUnique(Request $request)
+    {
+        return json_encode(!Post::where('slug', '=', $request->slug)->exists());
     }
 }
