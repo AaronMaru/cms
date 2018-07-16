@@ -38,6 +38,7 @@
             </div>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
+    @include('partials.notifications')
     @yield('scripts')
 </body>
 </html>
